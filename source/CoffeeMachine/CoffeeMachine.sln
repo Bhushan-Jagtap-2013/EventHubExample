@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeMachine.UI", "CoffeeMachine.UI\CoffeeMachine.UI.csproj", "{12A964CE-115D-4E85-A604-1C6D1460EDF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeMachine.EventHub.Sender", "CoffeeMachine.EventHub.Sender\CoffeeMachine.EventHub.Sender.csproj", "{BA2FA928-CC78-4ECC-8A50-0733EA1BB1C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12A964CE-115D-4E85-A604-1C6D1460EDF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12A964CE-115D-4E85-A604-1C6D1460EDF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12A964CE-115D-4E85-A604-1C6D1460EDF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2FA928-CC78-4ECC-8A50-0733EA1BB1C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2FA928-CC78-4ECC-8A50-0733EA1BB1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2FA928-CC78-4ECC-8A50-0733EA1BB1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2FA928-CC78-4ECC-8A50-0733EA1BB1C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

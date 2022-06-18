@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeMachine.EventHub.Sender\CoffeeMachine.EventHub.Sender.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\CoffieeCup.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

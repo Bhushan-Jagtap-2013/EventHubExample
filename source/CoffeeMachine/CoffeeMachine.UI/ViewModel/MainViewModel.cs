@@ -1,11 +1,8 @@
-﻿using CoffeeMachine.UI.Model;
+﻿using CoffeeMachine.EventHub.Sender.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeMachine.UI.ViewModel
 {

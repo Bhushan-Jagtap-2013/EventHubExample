@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoffeeMachine.UI.Model
+﻿namespace CoffeeMachine.EventHub.Sender.Model
 {
-    internal class MachineData
+    public class MachineData
     {
         public string City { get; set; }
         public string SerialNumber { get; set; }
