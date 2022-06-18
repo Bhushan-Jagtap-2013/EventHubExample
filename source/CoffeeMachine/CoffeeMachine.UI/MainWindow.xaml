@@ -1,0 +1,56 @@
+﻿<Window x:Class="CoffeeMachine.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoffeeMachine.UI"
+        mc:Ignorable="d"
+        Title="Coffee Machine" Height="450" Width="800" FontSize="16">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="DarkGray">
+            <Image Source="Images\CoffieeCup.png" Width="120" Height="80" />
+            <TextBlock Text="This is Coffiee Machine"
+                       FontSize="45"
+                       VerticalAlignment="Center"
+                       FontWeight="ExtraBold"
+                       Foreground="SaddleBrown" />
+        </StackPanel>
+
+        <DockPanel Grid.Row="1">
+            <TextBlock Text="City - " Margin="5 5 0 5" />
+            <TextBox Margin="5" />
+        </DockPanel>
+        
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Serial Number - " Margin="5 5 0 5" />
+            <TextBox Margin="5" />
+        </DockPanel>
+
+        <GroupBox Header="Send on action" Grid.Row="2" Margin="5">
+            <StackPanel>
+                <Button Content="White Chocolate Mocha" Margin="5" />
+                <Button Content="Americano" Margin="5" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Timer Send" Grid.Row="2" Grid.Column="1" Margin="5">
+            <StackPanel>
+                <CheckBox Content="Sending" />
+                <TextBlock Text="Boiler Temp" />
+                <Slider />
+                <TextBlock Text="Bean count"/>
+                <Slider />
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
