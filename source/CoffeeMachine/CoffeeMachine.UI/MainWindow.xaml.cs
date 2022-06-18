@@ -1,4 +1,5 @@
-﻿using CoffeeMachine.UI.ViewModel;
+﻿using CoffeeMachine.EventHub.Sender;
+using CoffeeMachine.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace CoffeeMachine.UI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(new MachineDataSender());
         }
     }
 }

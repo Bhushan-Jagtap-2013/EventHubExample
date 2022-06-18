@@ -1,8 +1,10 @@
-﻿using CoffeeMachine.EventHub.Sender.Model;
+﻿using CoffeeMachine.EventHub.Sender;
+using CoffeeMachine.EventHub.Sender.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoffeeMachine.UI.ViewModel
 {
@@ -12,13 +14,15 @@ namespace CoffeeMachine.UI.ViewModel
         private int _counterAmericano;
         private string _city;
         private string _serialNumber;
+        private IMachineDataSender _machineDataSender;
 
-        public MainViewModel()
+        public MainViewModel(IMachineDataSender machineDataSender)
         {
             SerialNumber = Guid.NewGuid().ToString().Substring(0, 10);
             MakeMocaCommand = new DelegateCommand(MakeMoca);
             MakeAmericanoCommand = new DelegateCommand(MakeAmericano);
             City = GetCity();
+            this._machineDataSender = machineDataSender;
         }
 
         private string GetCity()
@@ -28,18 +32,20 @@ namespace CoffeeMachine.UI.ViewModel
             return ListOfCity[(new Random()).Next(ListOfCity.Count())];
         }
 
-        private void MakeAmericano()
+        private async void MakeAmericano()
         {
             CounterAmericano++;
             MachineData machineData = 
                 InitializeMachineData(nameof(CounterAmericano), CounterAmericano);
+            await SendDataAsync(machineData);
         }
 
-        private void MakeMoca()
+        private async void MakeMoca()
         {
             CounterMoca++;
             MachineData machineData =
                 InitializeMachineData(nameof(CounterMoca), CounterMoca);
+            await SendDataAsync(machineData);
         }
 
         public int CounterMoca {
@@ -89,6 +95,11 @@ namespace CoffeeMachine.UI.ViewModel
             data.SensorValue = sensorValue;
             data.CreationTime = DateTime.Now;
             return data;
+        }
+
+        private async Task SendDataAsync(MachineData machineData)
+        {
+            await _machineDataSender.SendDataAsync(machineData);
         }
     }
 }
