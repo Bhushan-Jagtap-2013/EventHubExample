@@ -18,28 +18,35 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="DarkGray">
-            <Image Source="Images\CoffieeCup.png" Width="120" Height="80" />
+            <Image Width="120" Height="80" Source="\Images\CoffieeCup.png" />
             <TextBlock Text="This is Coffiee Machine"
                        FontSize="45"
                        VerticalAlignment="Center"
                        FontWeight="ExtraBold"
-                       Foreground="SaddleBrown" />
+                       Foreground="SaddleBrown" Margin="50 5 0 5"/>
         </StackPanel>
 
         <DockPanel Grid.Row="1">
             <TextBlock Text="City - " Margin="5 5 0 5" />
-            <TextBox Margin="5" />
+            <TextBox Margin="5" Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
         
         <DockPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Serial Number - " Margin="5 5 0 5" />
-            <TextBox Margin="5" />
+            <TextBox Margin="5"
+                     Text="{Binding SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
 
         <GroupBox Header="Send on action" Grid.Row="2" Margin="5">
             <StackPanel>
-                <Button Content="White Chocolate Mocha" Margin="5" />
-                <Button Content="Americano" Margin="5" />
+                <Button Margin="5" Command="{Binding MakeMocaCommand}">
+                    <TextBlock Text="{Binding CounterMoca,
+                    StringFormat='Make White Chocolate Mocha #({0})', FallbackValue='Fallback Make Moca'}" />
+                </Button>
+                <Button Margin="5" Command="{Binding MakeAmericanoCommand}">
+                    <TextBlock Text="{Binding CounterAmericano,
+                    StringFormat='Make CounterAmericano #({0})', FallbackValue='Fallback Make Americano'}" />
+                </Button>
             </StackPanel>
         </GroupBox>
 
