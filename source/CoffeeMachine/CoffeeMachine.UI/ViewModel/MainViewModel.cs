@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using CoffeeMachine.UI.Model;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,20 @@ namespace CoffeeMachine.UI.ViewModel
             SerialNumber = Guid.NewGuid().ToString().Substring(0, 10);
             MakeMocaCommand = new DelegateCommand(MakeMoca);
             MakeAmericanoCommand = new DelegateCommand(MakeAmericano);
-
         }
 
         private void MakeAmericano()
         {
             CounterAmericano++;
+            MachineData machineData = 
+                InitializeMachineData(nameof(CounterAmericano), CounterAmericano);
         }
 
         private void MakeMoca()
         {
             CounterMoca++;
+            MachineData machineData =
+                InitializeMachineData(nameof(CounterMoca), CounterMoca);
         }
 
         public int CounterMoca {
@@ -70,5 +74,16 @@ namespace CoffeeMachine.UI.ViewModel
 
         public DelegateCommand MakeMocaCommand { get; }
         public DelegateCommand MakeAmericanoCommand { get; }
+
+        private MachineData InitializeMachineData(string sensorType, int sensorValue)
+        {
+            MachineData data = new MachineData();
+            data.SerialNumber = SerialNumber;
+            data.City = City;
+            data.SensorType = sensorType;
+            data.SensorValue = sensorValue;
+            data.CreationTime = DateTime.Now;
+            return data;
+        }
     }
 }
