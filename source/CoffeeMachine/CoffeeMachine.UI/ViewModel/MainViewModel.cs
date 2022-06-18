@@ -21,6 +21,14 @@ namespace CoffeeMachine.UI.ViewModel
             SerialNumber = Guid.NewGuid().ToString().Substring(0, 10);
             MakeMocaCommand = new DelegateCommand(MakeMoca);
             MakeAmericanoCommand = new DelegateCommand(MakeAmericano);
+            City = GetCity();
+        }
+
+        private string GetCity()
+        {
+            Random random = new Random();
+            string[] ListOfCity = new string[] { "Philadelphia", "Juneau", "Phoenix", "Little Rock" };
+            return ListOfCity[(new Random()).Next(ListOfCity.Count())];
         }
 
         private void MakeAmericano()
