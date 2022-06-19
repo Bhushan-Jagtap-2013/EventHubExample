@@ -25,7 +25,8 @@ namespace CoffeeMachine.UI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(new MachineDataSender());
+            string connectionString = string.Empty;
+            DataContext = new MainViewModel(new MachineDataSender(connectionString));
         }
     }
 }
