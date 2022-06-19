@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,10 +43,9 @@ namespace CoffeeMachine.UI.ViewModel
         private async void DispatcherTimer_Tick(object? sender, EventArgs e)
         {
             MachineData boilerTempData = InitializeMachineData(nameof(BoilerTemp), BoilerTemp);
-            MachineData bealLevelData = InitializeMachineData(nameof(BeanLevel), BeanLevel);
+            MachineData beanLevelData = InitializeMachineData(nameof(BeanLevel), BeanLevel);
 
-            await SendDataAsync(boilerTempData);
-            await SendDataAsync(bealLevelData);
+            await SendDataAsync(new[] { boilerTempData, beanLevelData });
         }
 
         private string GetCity()
@@ -163,6 +164,22 @@ namespace CoffeeMachine.UI.ViewModel
                 WriteLog("Sent to EventHub : " + machineData);
             }
             catch(Exception e)
+            {
+                WriteLog($"Exception: {e.Message}");
+            }
+        }
+
+        private async Task SendDataAsync(IEnumerable<MachineData> machineDatas)
+        {
+            try
+            {
+                await _machineDataSender.SendDataAsync(machineDatas);
+                foreach (MachineData data in machineDatas)
+                {
+                    WriteLog("Sent to EventHub : " + data);
+                }
+            }
+            catch (Exception e)
             {
                 WriteLog($"Exception: {e.Message}");
             }
