@@ -12,7 +12,8 @@ namespace CoffeeMachine.EventHub.Sender.Model
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this, Formatting.None);
+            return String.Join(
+                " | ", City, SerialNumber, SensorType, SensorValue, CreationTime);
         }
     }
 }

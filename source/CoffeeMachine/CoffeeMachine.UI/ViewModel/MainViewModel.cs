@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace CoffeeMachine.UI.ViewModel
 {
@@ -17,6 +18,10 @@ namespace CoffeeMachine.UI.ViewModel
         private string _city;
         private string _serialNumber;
         private IMachineDataSender _machineDataSender;
+        private int _boilerTemp;
+        private int _beanLevel;
+        private bool _isSending;
+        private DispatcherTimer _timer;
 
         public MainViewModel(IMachineDataSender machineDataSender)
         {
@@ -26,6 +31,20 @@ namespace CoffeeMachine.UI.ViewModel
             City = GetCity();
             this._machineDataSender = machineDataSender;
             Logs = new ObservableCollection<string>();
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(2)
+            };
+            _timer.Tick += DispatcherTimer_Tick;
+        }
+
+        private async void DispatcherTimer_Tick(object? sender, EventArgs e)
+        {
+            MachineData boilerTempData = InitializeMachineData(nameof(BoilerTemp), BoilerTemp);
+            MachineData bealLevelData = InitializeMachineData(nameof(BeanLevel), BeanLevel);
+
+            await SendDataAsync(boilerTempData);
+            await SendDataAsync(bealLevelData);
         }
 
         private string GetCity()
@@ -89,6 +108,41 @@ namespace CoffeeMachine.UI.ViewModel
         public DelegateCommand MakeMocaCommand { get; }
         public DelegateCommand MakeAmericanoCommand { get; }
         public ObservableCollection<string> Logs { get; }
+        public int BoilerTemp
+        {
+            get => _boilerTemp; set
+            {
+                _boilerTemp = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int BeanLevel
+        {
+            get => _beanLevel; set
+            {
+                _beanLevel = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsSending
+        {
+            get => _isSending; set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    if(IsSending)
+                    {
+                        _timer.Start();
+                    }
+                    else
+                    {
+                        _timer.Stop();
+                    }
+                }
+                RaisePropertyChanged();
+            }
+        }
 
         private MachineData InitializeMachineData(string sensorType, int sensorValue)
         {

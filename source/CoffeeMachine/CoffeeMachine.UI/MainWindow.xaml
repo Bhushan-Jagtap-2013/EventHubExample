@@ -54,11 +54,16 @@
 
         <GroupBox Header="Timer Send" Grid.Row="2" Grid.Column="1" Margin="5">
             <StackPanel>
-                <CheckBox Content="Sending" />
-                <TextBlock Text="Boiler Temp" />
-                <Slider />
-                <TextBlock Text="Bean count" />
-                <Slider />
+                <CheckBox Content="Sending"
+                          IsChecked="{Binding IsSending, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{Binding BoilerTemp, StringFormat=Boiler Temp: {0} C}"/>
+                <Slider
+                    Value="{Binding BoilerTemp, Mode=TwoWay}"
+                    Maximum="100"/>
+                <TextBlock Text="{Binding BeanLevel, StringFormat=Bean Level: {0} %}"/>
+                <Slider 
+                    Value="{Binding BeanLevel, Mode=TwoWay}"
+                    Maximum="100"/>
             </StackPanel>
         </GroupBox>
 
