@@ -35,7 +35,7 @@ namespace CoffeeMachine.EventHub.Sender
 
         public async Task SendDataAsync(IEnumerable<MachineData> datas)
         {
-            using EventDataBatch eventBatch = await _eventHubProducerClient.CreateBatchAsync();
+            EventDataBatch eventBatch = await _eventHubProducerClient.CreateBatchAsync();
 
             for (int i = 1; i <= datas.Count(); i++)
             {
@@ -43,10 +43,16 @@ namespace CoffeeMachine.EventHub.Sender
                 EventData eventData = new EventData(new BinaryData(dataAsJson));
                 if (!eventBatch.TryAdd(eventData))
                 {
-                    throw new Exception($"Event {i} is too large for the batch and cannot be sent.");
+                    await _eventHubProducerClient.SendAsync(eventBatch);
+                    eventBatch = await _eventHubProducerClient.CreateBatchAsync();
+                    eventBatch.TryAdd(eventData);
                 }
             }
-            await _eventHubProducerClient.SendAsync(eventBatch);
+
+            if (eventBatch.Count > 0)
+            {
+                await _eventHubProducerClient.SendAsync(eventBatch);
+            }
         }
     }
 }
