@@ -1,8 +1,10 @@
 ﻿using CoffeeMachine.EventHub.Sender;
 using CoffeeMachine.EventHub.Sender.Model;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +25,7 @@ namespace CoffeeMachine.UI.ViewModel
             MakeAmericanoCommand = new DelegateCommand(MakeAmericano);
             City = GetCity();
             this._machineDataSender = machineDataSender;
+            Logs = new ObservableCollection<string>();
         }
 
         private string GetCity()
@@ -85,6 +88,7 @@ namespace CoffeeMachine.UI.ViewModel
 
         public DelegateCommand MakeMocaCommand { get; }
         public DelegateCommand MakeAmericanoCommand { get; }
+        public ObservableCollection<string> Logs { get; }
 
         private MachineData InitializeMachineData(string sensorType, int sensorValue)
         {
@@ -99,7 +103,20 @@ namespace CoffeeMachine.UI.ViewModel
 
         private async Task SendDataAsync(MachineData machineData)
         {
-            await _machineDataSender.SendDataAsync(machineData);
+            try
+            {
+                await _machineDataSender.SendDataAsync(machineData);
+                WriteLog("Sent to EventHub : " + machineData);
+            }
+            catch(Exception e)
+            {
+                WriteLog($"Exception: {e.Message}");
+            }
+        }
+
+        private void WriteLog(string log)
+        {
+            Logs.Insert(0, log);
         }
     }
 }

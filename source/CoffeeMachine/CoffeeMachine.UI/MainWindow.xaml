@@ -10,6 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -55,9 +57,15 @@
                 <CheckBox Content="Sending" />
                 <TextBlock Text="Boiler Temp" />
                 <Slider />
-                <TextBlock Text="Bean count"/>
+                <TextBlock Text="Bean count" />
                 <Slider />
             </StackPanel>
+        </GroupBox>
+
+        <GridSplitter Grid.Row="3" Grid.ColumnSpan="2" Height="5" HorizontalAlignment="Stretch"/>
+
+        <GroupBox Header="Logs" Grid.Row="4" Grid.ColumnSpan="2" >
+            <ListView ItemsSource="{Binding Logs}" />
         </GroupBox>
     </Grid>
 </Window>

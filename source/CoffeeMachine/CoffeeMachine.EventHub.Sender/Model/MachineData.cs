@@ -1,4 +1,6 @@
-﻿namespace CoffeeMachine.EventHub.Sender.Model
+﻿using Newtonsoft.Json;
+
+namespace CoffeeMachine.EventHub.Sender.Model
 {
     public class MachineData
     {
@@ -7,5 +9,10 @@
         public string SensorType { get; set; }
         public int SensorValue { get; set; }
         public DateTime CreationTime { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.None);
+        }
     }
 }
