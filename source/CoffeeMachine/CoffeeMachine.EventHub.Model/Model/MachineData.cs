@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace CoffeeMachine.EventHub.Sender.Model
+﻿namespace CoffeeMachine.EventHub.Model
 {
     public class MachineData
     {

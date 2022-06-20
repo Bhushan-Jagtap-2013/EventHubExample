@@ -1,12 +1,7 @@
 ﻿using Azure.Messaging.EventHubs;
 using Azure.Messaging.EventHubs.Producer;
-using CoffeeMachine.EventHub.Sender.Model;
+using CoffeeMachine.EventHub.Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeMachine.EventHub.Sender
 {

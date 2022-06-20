@@ -1,10 +1,8 @@
-﻿using CoffeeMachine.EventHub.Sender;
-using CoffeeMachine.EventHub.Sender.Model;
-using Newtonsoft.Json;
+﻿using CoffeeMachine.EventHub.Model;
+using CoffeeMachine.EventHub.Sender;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
